@@ -1,0 +1,6 @@
+Write a program that print all the different reflexive and
+symmetric relations on a set with n elements (take n = 6 for the
+demonstration and set {a, b, c, d, e, f})
+
+1. Create set (from letters accoridng to given number)
+2. 
