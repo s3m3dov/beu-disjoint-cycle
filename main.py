@@ -32,11 +32,39 @@ def ReturnDisjointCyclesAsList(inputPermutations):
     return resultDisjointCycles
 
 
+# Return Transpositions of Cycle (> 2)
+def ReturnTranspositionOfOneCycleAsList(cycle):
+    resultTranspositions = []
+    revCycle = cycle[::-1]
+    
+    for i in range(1, len(revCycle)):
+        couple = [revCycle[i-1], revCycle[i]]
+        resultTranspositions.append(couple)
+            
+    return resultTranspositions
+
 
 # Get disjointCycles
 # Returns 2-cycles (a.k.a transposition)
 def ReturnTranspositionCyclesAsList(disjointCycles):
-    return None
+    resultTranspositionedCycles = []
+
+    for cycle in disjointCycles:
+        if len(cycle) > 2:
+            transpositionList = ReturnTranspositionOfOneCycleAsList(cycle)
+            for i in transpositionList:
+                resultTranspositionedCycles.append(i)
+
+        else:
+            resultTranspositionedCycles.append(cycle) 
+
+    return resultTranspositionedCycles
+
+
+
+# Return: List of Cycles except 1-cycles
+def ReturnCyclesExceptOneCycle(resultCycles):
+    return [cycle for cycle in resultCycles if len(cycle) > 1]
 
 
 
@@ -55,9 +83,38 @@ def ReturnCyclesAsString(resultCycles):
 # My Driver
 if __name__ == '__main__':
     inputPermutations = list(map(int, input().split()))
+    print("---------------------------------------------\n")
 
     disjointCycles = ReturnDisjointCyclesAsList(inputPermutations)
-    transpositionCycles = ReturnTranspositionCyclesAsList(disjointCycles)
-
     print("Disjoint cycles:", ReturnCyclesAsString(disjointCycles))
-    print("Transpositions:", ReturnCyclesAsString(transpositionCycles))
+
+    transpositionCycles = ReturnTranspositionCyclesAsList(disjointCycles)
+    if disjointCycles != transpositionCycles:
+        print("Transpositions:", ReturnCyclesAsString(transpositionCycles))
+    else:
+        print("We don't need to show cycle as a product of transpositions")
+
+
+    # Other Version of Printing
+    print("---------------------------------------------\n")
+
+    disjointCycles = ReturnCyclesExceptOneCycle(ReturnDisjointCyclesAsList(inputPermutations))
+    print("Disjoint cycles:", ReturnCyclesAsString(disjointCycles))
+
+    transpositionCycles = ReturnCyclesExceptOneCycle(ReturnTranspositionCyclesAsList(disjointCycles))
+    if disjointCycles != transpositionCycles:
+        print("Transpositions:", ReturnCyclesAsString(transpositionCycles))
+    else:
+        print("We don't need to show cycle as a product of transpositions")
+
+
+    print("---------------------------------------------\n")
+    if len(transpositionCycles) % 2:
+        print("This permutation is ODD")
+    else:
+        print("This permutation is EVEN")
+
+
+    print("---------------------------------------------\n")
+
+    input("Press any key to EXIT:")

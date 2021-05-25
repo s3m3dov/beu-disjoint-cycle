@@ -1,0 +1,2 @@
+https://www.wolframalpha.com/input/?i=permutation+%281%2C+5%2C+3%29+%282%29+%284%29
+https://www.wolframalpha.com/input/?i=permutation+%281%2C+5%2C+2%2C+4%29+%283%29
